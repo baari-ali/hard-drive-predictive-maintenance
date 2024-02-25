@@ -1,3 +1,3 @@
 # Hard Drive Predictive Maintenance
 
-Will be predicting the Remaining Useful Life (RUL) on hard drive data using a machine learning algorithm such as Random Forest.
+Predicting the Remaining Useful Life (RUL) on hard drives using random forest and decision trees built from scratch. Then comparing the results with Sklearn's algorithms.
