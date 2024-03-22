@@ -1,2 +1,8 @@
 .idea/
 .ipynb_checkpoints/
+src/__pycache__/
+src/testing_train_test_splits/
+dataset/data_Q1_2019.zip
+dataset/Q1_2019.csv
+dataset/preprocessed_q1_2019.csv
+dataset/failed_hdds.csv
