@@ -8,11 +8,11 @@ def calculate_mse(y_true, y_pred):
     Calculate Mean Squared Error (MSE) from scratch.
 
     Parameters:
-        y_true: array-like, shape (n_samples,) - True values.
-        y_pred: array-like, shape (n_samples,) - Predicted values.
+        y_true: Actual values.
+        y_pred: Predicted values.
 
     Returns:
-        mse: float - MSE.
+        mse (float): Mean Squared Error.
     """
     squared_diff = (y_true - y_pred) ** 2
     mse = np.mean(squared_diff)
@@ -24,11 +24,11 @@ def calculate_rmse(y_true, y_pred):
     Calculate Root Mean Squared Error (RMSE) from scratch.
 
     Parameters:
-        y_true: array-like, shape (n_samples,) - True values.
-        y_pred: array-like, shape (n_samples,) - Predicted values.
+        y_true: Actual values.
+        y_pred: Predicted values.
 
     Returns:
-        rmse: float - RMSE.
+        rmse (float): Root Mean Squared Error.
     """    
     squared_diff = (y_true - y_pred) ** 2
     rmse = np.sqrt(np.mean(squared_diff))
@@ -40,11 +40,11 @@ def calculate_mae(y_true, y_pred):
     Calculate Mean Absolute Error (MAE) from scratch.
 
     Parameters:
-        y_true: array-like, shape (n_samples,) - True values.
-        y_pred: array-like, shape (n_samples,) - Predicted values.
+        y_true: Actual values.
+        y_pred: Predicted values.
 
     Returns:
-        mae: float - MAE.
+        mae (float): Mean Absolute Error.
     """
     absolute_diff = np.abs(y_true - y_pred)
     mae = np.mean(absolute_diff)
@@ -56,11 +56,11 @@ def calculate_r2(y_true, y_pred):
     Calculates the R^2 score from scratch.
 
     Parameters:
-        y_true: array-like, shape (n_samples,) - True values.
-        y_pred: array-like, shape (n_samples,) - Predicted values.
+        y_true: Actual values.
+        y_pred: Predicted values.
 
     Returns:
-        r2: float - R^2 score.
+        r2 (float): R-squared score.
     """
     mean_true = np.mean(y_true)
     
@@ -86,7 +86,7 @@ def regression_metrics(y_true, y_pred, model_name=''):
         model_name: str - Name of the model.
 
     Returns:
-        dict: Dictionary containing calculated metrics.
+        metrics (dict): Dictionary containing calculated metrics.
     """
     if model_name:
         print(f"Model: {model_name}\n")
@@ -164,7 +164,7 @@ def summary_statistics(values):
         values: Values for which to calculate summary statistics.
 
     Returns:
-        dict: Dictionary containing summary statistics.
+        summary_stats (dict): Dictionary containing summary statistics.
             Keys: 'minimum', 'mean', 'median', 'std_dev', 'maximum'
     """
     summary_stats = {
