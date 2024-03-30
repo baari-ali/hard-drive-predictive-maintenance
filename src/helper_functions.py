@@ -133,7 +133,7 @@ def plot_distribution(values,
     plt.ylabel(ylabel)
     plt.title(title)
     plt.grid(True)
-    plt.xticks(np.arange(0, 88, 10))
+    plt.xticks(np.arange(0, 91, 10))
     plt.tight_layout()
     
     if save_path:
@@ -166,8 +166,8 @@ def plot_actual_vs_predicted(y_true,
     plt.ylabel('Predicted RUL (days)')
     plt.title(title)
     plt.legend(loc='upper left')
-    plt.xticks(np.arange(0, 88, 10))
-    plt.yticks(np.arange(0, 88, 10))
+    plt.xticks(np.arange(0, 91, 10))
+    plt.yticks(np.arange(0, 91, 10))
     plt.tight_layout()
     
     if save_path:
@@ -213,7 +213,7 @@ def plot_summary_statistics(y_true,
     pred_maximum = np.max(y_pred)
     
     # Plot boxplot for both y_true and y_pred
-    true_boxes = plt.boxplot([y_true], vert=False, positions=[1], labels=['True'], patch_artist=True)
+    true_boxes = plt.boxplot([y_true], vert=False, positions=[1], labels=['Actual'], patch_artist=True)
     pred_boxes = plt.boxplot([y_pred], vert=False, positions=[1.3], labels=['Predicted'], patch_artist=True)
     
     # Set colors for the boxplots
@@ -223,7 +223,7 @@ def plot_summary_statistics(y_true,
         box.set(facecolor=pred_color)
     
     # Annotate summary statistics for y_true
-    plt.text(1, 0.85, f'Statistics of true values:', fontsize='medium', color=text_color_t)
+    plt.text(1, 0.85, f'Statistics of actual values:', fontsize='medium', color=text_color_t)
     plt.text(1, 0.75, f'Maximum: {true_maximum:.2f}', fontsize='medium', color=text_color_t)
     plt.text(1, 0.7, f'Mean: {true_mean:.2f}', fontsize='medium', color=text_color_t)
     plt.text(1, 0.65, f'Median: {true_median:.2f}', fontsize='medium', color=text_color_t)
@@ -241,7 +241,7 @@ def plot_summary_statistics(y_true,
     plt.xlabel('RUL (days)')
     plt.title(title)
     plt.grid(True)
-    plt.xticks(np.arange(0, 88, 10))
+    plt.xticks(np.arange(0, 91, 10))
     plt.tight_layout()
     
     if save_path:
@@ -252,8 +252,8 @@ def plot_summary_statistics(y_true,
     
 def plot_histograms_parallel(y_true, 
                              y_pred, 
-                             titles=('Distribution of True RUL', 'Distribution of Predicted RUL'), 
-                             xlabels=('True RUL (days)', 'Predicted RUL (days)'), 
+                             titles=('Distribution of Actual RUL', 'Distribution of Predicted RUL'), 
+                             xlabels=('Actual RUL (days)', 'Predicted RUL (days)'), 
                              ylabel='No. of Occurrences', 
                              colors=('orange', 'limegreen'),
                              save_path=None):
@@ -275,12 +275,12 @@ def plot_histograms_parallel(y_true,
         ax = axes[i]
         title = titles[i]
         
-        ax.hist(values, bins=30, color=colors[i], edgecolor='black', alpha=0.7)
+        ax.hist(values, bins=30, range=(0, 90), color=colors[i], edgecolor='black', alpha=0.7)
         ax.set_xlabel(xlabels[i])
         ax.set_ylabel(ylabel)
         ax.set_title(title)
-        ax.grid(True)
-        ax.set_xticks(np.arange(min(values), max(values)+1, 10))
+        ax.set_xticks(np.arange(0, 91, 3))
+        ax.set_yticks(np.arange(0, 301, 20))
     
     plt.tight_layout()
     
@@ -292,7 +292,7 @@ def plot_histograms_parallel(y_true,
 
 def plot_histograms_stacked(y_true, 
                             y_pred, 
-                            title='Comparison of True and Predicted Values',
+                            title='Comparison of Actual and Predicted Values',
                             xlabel='RUL (days)',
                             ylabel='No. of Occurrences',
                             actual_color='orange', 
@@ -311,22 +311,18 @@ def plot_histograms_stacked(y_true,
         predicted_color (tuple): The histogram color representing the predicted values.
         save_path (str): File path to save the figure.
     """
-    true_range = (min(y_true), max(y_true))
-    pred_range = (min(y_pred), max(y_pred))
-    common_range = (min(true_range[0], pred_range[0]), min(true_range[1], pred_range[1]))
-
     fig = plt.figure(figsize=(8, 6))
 
-    plt.hist(y_true, bins=30, range=common_range, color=actual_color, alpha=0.5, edgecolor='black', label='Actual')
-    plt.hist(y_pred, bins=30, range=common_range, color=predicted_color, alpha=0.5, edgecolor='black', label='Predicted')
+    plt.hist(y_true, bins=30, range=(0, 90), color=actual_color, alpha=0.5, edgecolor='black', label='Actual')
+    plt.hist(y_pred, bins=30, range=(0, 90), color=predicted_color, alpha=0.5, edgecolor='black', label='Predicted')
 
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
-    plt.grid(True)
     plt.legend()
     plt.tight_layout()
-    plt.xticks(np.arange(common_range[0], common_range[1]+1, 10))
+    plt.xticks(np.arange(0, 91, 3))
+    plt.yticks(np.arange(0, 301, 20))
     
     if save_path:
         plt.savefig(save_path)
